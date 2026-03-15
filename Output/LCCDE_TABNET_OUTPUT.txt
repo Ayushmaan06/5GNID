@@ -1,0 +1,49 @@
+
+LCCDE Leaders by class:
+Class 0 (Benign        ) -> random_forest
+Class 1 (UDPFlood      ) -> random_forest
+Class 2 (HTTPFlood     ) -> xgboost
+Class 3 (SlowrateDoS   ) -> xgboost
+Class 4 (TCPConnectScan) -> lightgbm
+Class 5 (SYNScan       ) -> lightgbm
+Class 6 (UDPScan       ) -> lightgbm
+Class 7 (SYNFlood      ) -> catboost
+Class 8 (ICMPFlood     ) -> xgboost
+
+=== TabNet Report ===
+                precision    recall  f1-score   support
+
+        Benign     0.6389    0.9683    0.7699     49103
+      UDPFlood     1.0000    0.9510    0.9749    260135
+     HTTPFlood     0.9809    0.7550    0.8533     64691
+   SlowrateDoS     0.9388    0.9766    0.9573     37032
+TCPConnectScan     0.0000    0.0000    0.0000         0
+       SYNScan     0.0000    0.0000    0.0000         0
+       UDPScan     0.0000    0.0000    0.0000         0
+      SYNFlood     0.9856    0.9996    0.9925      4929
+
+      accuracy                         0.9254    415890
+     macro avg     0.5680    0.5813    0.5685    415890
+  weighted avg     0.9488    0.9254    0.9304    415890
+
+
+=== LCCDE Ensemble Report ===
+                precision    recall  f1-score   support
+
+        Benign     0.3281    0.9984    0.4939     49103
+      UDPFlood     1.0000    0.6141    0.7610    260135
+     HTTPFlood     0.9926    0.9712    0.9818     64691
+   SlowrateDoS     0.9515    0.9874    0.9691     37032
+TCPConnectScan     0.0000    0.0000    0.0000         0
+       UDPScan     0.0000    0.0000    0.0000         0
+      SYNFlood     0.9972    1.0000    0.9986      4929
+
+      accuracy                         0.7529    415890
+     macro avg     0.6099    0.6530    0.6006    415890
+  weighted avg     0.9152    0.7529    0.7851    415890
+
+
+Benchmark summary:
+	Model	Accuracy	F1_Macro	F1_Weighted	InferenceTimeSec	ThroughputSamplesPerSec
+0	TabNet	0.92542	0.568486	0.930409	4.195169	99135.465844
+1	LCCDE	0.75286	0.600625	0.785129	196.760732	2113.683947
