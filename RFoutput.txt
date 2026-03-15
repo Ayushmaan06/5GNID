@@ -1,0 +1,149 @@
+[STEP 1] Loading raw data from: C:\Users\sayus\Downloads\ml\project\5gnidd\Combined.csv\Combined.csv
+  Raw shape: (1215890, 52)
+  Preprocessed shape: (1215890, 48)
+  Columns (48): ['Seq', 'Dur', 'sHops', 'dHops', 'TotPkts', 'SrcPkts', 'DstPkts', 'TotBytes', 'SrcBytes', 'DstBytes', 'Offset', 'sMeanPktSz', 'dMeanPktSz', 'Load', 'SrcLoad', 'DstLoad', 'Loss', 'SrcLoss', 'DstLoss', 'pLoss', 'Rate', 'SrcRate', 'DstRate', 'TcpRtt', 'SynAck', 'AckDat', 'sTos_', 'dTos_', 'sTtl_', 'dTtl_', 'SrcWin_', 'DstWin_', 'sVid_', 'dVid_', 'SrcTCPBase_', 'DstTCPBase_', 'Attack Type_', 'Proto_icmp', 'Proto_tcp', 'Proto_udp', 'Cause_Status', 'State_CON', 'State_ECO', 'State_FIN', 'State_INT', 'State_REQ', 'State_RST', 'Label__Malicious']
+
+  Binary features (13): ['seq', 'offset', 'sttl', 'ackdat', 'tcprtt', 'smeanpktsz', 'shops', 'dttl', 'srcbytes', 'totbytes', 'dmeanpktsz', 'srcwin', 'stos']
+  Multiclass features (14): ['ackdat', 'shops', 'seq', 'tcprtt', 'dmeanpktsz', 'offset', 'sttl', 'srctcpbase', 'smeanpktsz', 'dstloss', 'loss', 'dttl', 'srcbytes', 'totbytes']       
+  [WARNING] binary_threshold.txt not found; using fallback threshold=0.34
+
+======================================================================
+[LOAD] Loaded saved artifacts (eval-only mode)
+======================================================================
+  Binary model: C:\Users\sayus\Downloads\ml\project\5gnidd\output\binary_rf_model.joblib   
+  Binary scaler: C:\Users\sayus\Downloads\ml\project\5gnidd\output\binary_scaler.joblib    
+  Binary threshold: 0.340000
+  Multiclass model: C:\Users\sayus\Downloads\ml\project\5gnidd\output\multiclass_rf_model.joblib
+  Multiclass scaler: C:\Users\sayus\Downloads\ml\project\5gnidd\output\multiclass_scaler.joblib
+
+======================================================================
+[STEP 7] EVALUATION & BENCHMARKING (unseen test data)
+======================================================================
+  Test set size: 415890 samples
+
+
+  --- Sequential Binary-First ---
+    Time: 2.1666 s
+    Throughput: 191951.19 samples/s
+    Time/sample: 0.00521 ms
+    Accuracy (known only): 0.9958
+    Unknown/Suspicious: 36410/415890 (8.8%)
+                precision    recall  f1-score   support
+
+        Benign       1.00      1.00      1.00     49081
+      UDPFlood       1.00      1.00      1.00    223752
+     HTTPFlood       0.99      0.98      0.99     64688
+   SlowrateDoS       0.97      0.99      0.98     37030
+TCPConnectScan       0.00      0.00      0.00         0
+       SYNScan       0.00      0.00      0.00         0
+       UDPScan       0.00      0.00      0.00         0
+      SYNFlood       1.00      1.00      1.00      4929
+     ICMPFlood       0.00      0.00      0.00         0
+
+      accuracy                           1.00    379480
+     macro avg       0.55      0.55      0.55    379480
+  weighted avg       1.00      1.00      1.00    379480
+
+
+  --- Sequential Multiclass-First ---
+    Time: 1.4881 s
+    Throughput: 279470.24 samples/s
+    Time/sample: 0.00358 ms
+    Accuracy (known only): 0.9957
+    Unknown/Suspicious: 36410/415890 (8.8%)
+                precision    recall  f1-score   support
+
+        Benign       1.00      1.00      1.00     49081
+      UDPFlood       1.00      1.00      1.00    223752
+     HTTPFlood       0.99      0.98      0.99     64688
+   SlowrateDoS       0.97      0.99      0.98     37030
+TCPConnectScan       0.00      0.00      0.00         0
+       SYNScan       0.00      0.00      0.00         0
+       UDPScan       0.00      0.00      0.00         0
+      SYNFlood       1.00      1.00      1.00      4929
+     ICMPFlood       0.00      0.00      0.00         0
+
+      accuracy                           1.00    379480
+     macro avg       0.55      0.55      0.55    379480
+  weighted avg       1.00      1.00      1.00    379480
+
+
+  --- Parallel Voting ---
+    Time: 2.2721 s
+    Throughput: 183039.65 samples/s
+    Time/sample: 0.00546 ms
+    Accuracy (known only): 0.9957
+    Unknown/Suspicious: 36410/415890 (8.8%)
+                precision    recall  f1-score   support
+
+        Benign       1.00      1.00      1.00     49081
+      UDPFlood       1.00      1.00      1.00    223752
+     HTTPFlood       0.99      0.98      0.99     64688
+   SlowrateDoS       0.97      0.99      0.98     37030
+TCPConnectScan       0.00      0.00      0.00         0
+       SYNScan       0.00      0.00      0.00         0
+       UDPScan       0.00      0.00      0.00         0
+      SYNFlood       1.00      1.00      1.00      4929
+     ICMPFlood       0.00      0.00      0.00         0
+
+      accuracy                           1.00    379480
+     macro avg       0.55      0.55      0.55    379480
+  weighted avg       1.00      1.00      1.00    379480
+
+
+  --- Parallel Confidence ---
+    Time: 2.3957 s
+    Throughput: 173594.97 samples/s
+    Time/sample: 0.00576 ms
+    Accuracy (known only): 0.9966
+    Unknown/Suspicious: 102796/415890 (24.7%)
+                precision    recall  f1-score   support
+
+        Benign       1.00      1.00      1.00     49078
+      UDPFlood       1.00      1.00      1.00    159103
+     HTTPFlood       1.00      0.99      0.99     63559
+   SlowrateDoS       0.98      0.99      0.99     36426
+TCPConnectScan       0.00      0.00      0.00         0
+       SYNScan       0.00      0.00      0.00         0
+       UDPScan       0.00      0.00      0.00         0
+      SYNFlood       1.00      1.00      1.00      4928
+     ICMPFlood       0.00      0.00      0.00         0
+
+      accuracy                           1.00    313094
+     macro avg       0.55      0.55      0.55    313094
+  weighted avg       1.00      1.00      1.00    313094
+
+
+======================================================================
+  BENCHMARK SUMMARY
+======================================================================
+                   Strategy  Time (s)  Throughput (samples/s)  Time/sample (ms)  Accuracy  Unknown %
+    Sequential Binary-First    2.1666               191951.19           0.00521    0.9958        8.8
+Sequential Multiclass-First    1.4881               279470.24           0.00358    0.9957        8.8
+            Parallel Voting    2.2721               183039.65           0.00546    0.9957        8.8
+        Parallel Confidence    2.3957               173594.97           0.00576    0.9966       24.7
+
+
+======================================================================
+  TOTAL PIPELINE TIME: 14.72 seconds
+======================================================================
+PS C:\Users\sayus\Downloads\ml\project\5gnidd>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
