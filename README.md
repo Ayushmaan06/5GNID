@@ -1,6 +1,3 @@
-Optimizing tool selection...Here is a complete draft of the research paper formatted for an academic conference.
-
-***
 
 # A High-Throughput Cascade Architecture for Real-Time 5G Intrusion Detection: Balancing Accuracy, Latency, and Uncertainty Handling
 
